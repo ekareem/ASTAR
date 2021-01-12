@@ -1,0 +1,104 @@
+@startuml Astar
+
+class Client{
++ Client (void)
++ set (SDL_Event, SDL_Renderer, Astar) :void
++ draw (SDL_Renderer, Astar) :void
++ _x : int
++ _y : int
+}
+
+class Draw{
++ Draw (void)
++ Draw (Grid, int)
++ setColor (Node, Node, vector, vectoer, vector, vector) :void
++ setSize () :void
++ drawGrid (SDL_Renderer, Node, Node, vector, vector, vector, vector) :void
++ draw(SDL_Renderer) :void
++ _grid : Grid
++ _rect : Rect[][]
+}
+
+class Astar{
++ Astar (void)
++ Astar (int, int)
++ clear (void) :void
++ obstacle (int, int) :void
++ removeObstacle (int, int) :void
++ start (int, int) :void
++ lowestf (void) :void
++ openIndex (Node) :void
++ isClosed (Node) :bool
++ isOpen (Node) :bool
++ isShorter (Node, Node) :bool
++ print (void) :void
++ search (SDL_Renderer) :bool
++ draw (SDL_Renderer) :void
++ _open :vector<Node>
++ _close :vector<Node>
++ _obstacle :vector<Node>
++ _path : vector<Node>
++ _start :Node
++ _goal	:Node
++ _draw :Draw
++ _grid :Grid
+}
+
+class Grid{
++ Grid (void)
++ Grid (int,int)
++ init (void) :void
++ resetParent (void) : void
++ setGoal (Node) :void
++ inGrid (int, int) :void
++ neighbour (Node) :vector<Node>
++ print (void) :void
++ _l :int
++ _h :int
++ _grid :Node[][]
+}
+
+class Node{
++ Node (void)
++ Node (int,int)
++ g (void) :void
++ h (void) :void
++ f (void) :void
++ goal (Node) :void
++ parent (Node) :void
++ walkable (bool) :void
++ print (void) :void
++ _x :int
++ _y :int
++ _walkable :bool
+}
+
+
+class Rect{
++ Rect (void)
++ Rect (float,float,float,float)
++ Rect (float,float,float,float,r,g,b)
++ draw (Sdl_Renderer) :void
++ fill (Sdl_Renderer,r,g,b) :void
++ fill (SDL_Renderer) :void
++ overlap (Rect) :bool
++ overlap (Rect,Rect) :bool
++ unionRect (Rect): Rect
++ pointInRect (float, float):  Rect
+- _r :int
+- _g :int
+- _b :int
+- _x1 :int
+- _x2 :int
+- _y1 :int
+- _y2 :int
+}
+
+Grid *-- Node
+Astar *-- Node
+Astar *-- Grid
+Draw *-- Grid
+Draw .. Node
+Client .. Astar
+Draw .. Rect
+@enduml
